@@ -24,13 +24,30 @@ class QuerybuilderPracticeController extends Controller
     //    ->leftJoin('categories','products.category_id','=','categories.id')
     //    ->leftJoin('brands','products.brand_id','=', 'brands.id')->get();
      // right join products on categories and brands
-       $result=DB::table('products')
-       ->rightJoin('categories','products.category_id','=','categories.id')
-       ->rightJoin('brands','products.brand_id','=', 'brands.id')->get();
+      //  $result=DB::table('products')
+      //  ->rightJoin('categories','products.category_id','=','categories.id')
+      //  ->rightJoin('brands','products.brand_id','=', 'brands.id')->get();
      // cross join products on categories and brands
-       $result=DB::table('products')
-       ->crossJoin('categories')
-       ->get();
-        return $result;
+      //  $result=DB::table('products')
+      //  ->crossJoin('categories')
+      //  ->get();
+      // union join 
+      // $query1 = DB::table('products')->where('products.price','>','2000');
+      // $query2= DB::table('products')->where('products.discount','=','1');
+      // $result=$query1->union($query2)->get();
+      // search for products
+      // $result = DB::table('products')->where('products.title', 'like', '%Ca%')->get();
+  // whereIn for products // whereNotIn  opposite actions instead of whereIn
+  // $result=DB::table('products')->whereIn('products.price',['20','5000'])->get();
+  // // orWhere for products 
+  // $result = DB::table('products')
+  // ->where('products.price', '>', 2000)
+  // ->orWhere('products.price', '=', 20)
+  // ->get();
+  // whereBetween for products 
+  $result = DB::table('products')
+  ->whereBetween('price',[1,100])
+->get();
+    return $result;
     }
 }
